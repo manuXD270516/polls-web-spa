@@ -8,6 +8,7 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./dialog-detail.component.scss'],
 })
 export class DialogDetailComponent implements OnInit {
+  pollster!: any;
   constructor(
     private _apiService: ApiService,
     private _dialogRef: MatDialogRef<DialogDetailComponent>,
@@ -15,13 +16,21 @@ export class DialogDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.params);
-    //this.getDetailPollster();
+    let { id } = this.params;
+    this.getDetailPollster(id);
   }
 
   getDetailPollster(id: number) {
-    this._apiService.getPollsterById(2).subscribe((res) => {
+    /* this._apiService.getPollsterById(id).subscribe((res) => {
       console.log(res);
+    }); */
+
+    this._apiService.getPollsterById(id).subscribe({
+      next: (res: any) => {
+        this.pollster = res;
+        console.log(this.pollster);
+      },
+      error: (err) => {},
     });
   }
 }

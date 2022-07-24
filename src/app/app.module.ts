@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 
+import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -35,7 +36,10 @@ import { ChildComponent } from './tuts/view-child/child/child.component';
 import { ToParentComponent } from './tuts/to-parent/to-parent.component';
 import { Child2Component } from './tuts/to-parent/child2/child2.component';
 import { DialogDetailComponent } from './dialog-detail/dialog-detail.component';
+import { DialogPollsComponent } from './dialog-polls/dialog-polls.component';
+import { DialogMapComponent } from './dialog-map/dialog-map.component';
 
+import { GoogleMapsModule } from '@angular/google-maps';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,9 +54,12 @@ import { DialogDetailComponent } from './dialog-detail/dialog-detail.component';
     ToParentComponent,
     Child2Component,
     DialogDetailComponent,
+    DialogPollsComponent,
+    DialogMapComponent,
   ],
   exports: [MatInputModule],
   imports: [
+    MatDividerModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -72,6 +79,7 @@ import { DialogDetailComponent } from './dialog-detail/dialog-detail.component';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    GoogleMapsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

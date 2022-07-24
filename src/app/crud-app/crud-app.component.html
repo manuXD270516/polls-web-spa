@@ -1,6 +1,6 @@
 <div class="container">
   <div style="margin-top: 50px">
-    <h1>LISTADO DE ENCUESTADORES</h1>
+    <h3>LISTADO DE ENCUESTADORES</h3>
 
     <mat-form-field appearance="standard">
       <mat-label>Filtro</mat-label>
@@ -67,7 +67,7 @@
         </ng-container>
 
         <!-- Fruit Column -->
-        <ng-container matColumnDef="Action">
+        <ng-container matColumnDef="Accion">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
           <td mat-cell *matCellDef="let row">
             <button
@@ -80,11 +80,15 @@
             <button
               mat-icon-button
               color="accent"
-              (click)="polls(row.PollsterId)"
+              (click)="openPollsDialog(row.PollsterId)"
             >
               <mat-icon>poll</mat-icon>
             </button>
-            <button mat-icon-button color="warn" (click)="maps(row.PollsterId)">
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="openMapDialog(row.PollsterId)"
+            >
               <mat-icon>map</mat-icon>
             </button>
           </td>

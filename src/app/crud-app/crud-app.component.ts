@@ -7,6 +7,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { DialogComponent } from '../dialog/dialog.component';
 import { ApiService } from '../services/api.service';
 import { DialogDetailComponent } from '../dialog-detail/dialog-detail.component';
+import { DialogPollsComponent } from '../dialog-polls/dialog-polls.component';
+import { DialogMapComponent } from '../dialog-map/dialog-map.component';
 
 @Component({
   selector: 'app-crud-app',
@@ -24,7 +26,7 @@ export class CrudAppComponent implements OnInit {
     'Telefono',
     'Sexo',
     'Direccion',
-    'Action',
+    'Accion',
   ];
   matTableDataSource!: MatTableDataSource<any>;
 
@@ -40,7 +42,6 @@ export class CrudAppComponent implements OnInit {
   getAllPollsters() {
     this._apiService.getAllPollster().subscribe({
       next: (res: any) => {
-        console.log(res);
         this.matTableDataSource = new MatTableDataSource(res);
         this.matTableDataSource.paginator = this.matPaginator;
         this.matTableDataSource.sort = this.matSort;
@@ -65,10 +66,6 @@ export class CrudAppComponent implements OnInit {
       });
   }
 
-  detail(id: number) {}
-  polls(id: number) {}
-  maps(id: number) {}
-
   openDialog() {
     const dialogRef = this._dialog
       .open(DialogComponent, {
@@ -84,11 +81,10 @@ export class CrudAppComponent implements OnInit {
   }
 
   openDetailDialog(id: number) {
-    console.log(id);
     const dialogRef = this._dialog
       .open(DialogDetailComponent, {
         width: '60%',
-        height: '80%',
+        height: '88%',
         data: { id },
       })
       .afterClosed()
@@ -96,6 +92,33 @@ export class CrudAppComponent implements OnInit {
         console.log(val);
       });
   }
+
+  openPollsDialog(id: number) {
+    const dialogRef = this._dialog
+      .open(DialogPollsComponent, {
+        width: '90%',
+        height: '90%',
+        data: { id },
+      })
+      .afterClosed()
+      .subscribe((val) => {
+        //console.log(val);
+      });
+  }
+
+  openMapDialog(id: number) {
+    const dialogRef = this._dialog
+      .open(DialogMapComponent, {
+        width: '90%',
+        height: '90%',
+        data: { id },
+      })
+      .afterClosed()
+      .subscribe((val) => {
+        //console.log(val);
+      });
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.matTableDataSource.filter = filterValue.trim().toLowerCase();
