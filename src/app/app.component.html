@@ -1,0 +1,30 @@
+<mat-toolbar color="primary">
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon>assignment</mat-icon>
+  </button>
+  <span>APP ENCUESTAS - MONITOREO</span>
+  <!-- <span>Angluar14 CRUD with Material</span> -->
+  <span class="example-spacer"></span>
+
+  <!-- <a mat-flat-button routerLink="/tuts" style="margin-right: 10px" color="warn"
+    >Tuts</a
+  > -->
+  <a
+    mat-flat-button
+    routerLink="/pollsters"
+    style="margin-right: 10px"
+    color="warn"
+  >
+    <mat-icon>list</mat-icon>
+    Encuestadores</a
+  >
+  <button mat-raised-button color="warn" (click)="openDialog()">
+    <mat-icon>add_box</mat-icon>
+    Nuevo encuestador
+  </button>
+</mat-toolbar>
+<router-outlet></router-outlet>

@@ -1,0 +1,21 @@
+<h1>{{title}} (Consoles output)</h1>
+
+<mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Keyup Event</mat-label>
+    <input type="email" #keyupBox matInput placeholder="" (keyup)="getData(keyupBox.value)">
+</mat-form-field>
+
+<mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Keydown Event</mat-label>
+    <input type="email" #keydownBox matInput placeholder="" (keydown)="getData(keydownBox.value)">
+</mat-form-field>
+
+<mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Keypress Event</mat-label>
+    <input type="email" #keypressBox matInput placeholder="" (keypress)="getData(keypressBox.value)">
+</mat-form-field>
+
+<mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Blur Event</mat-label>
+    <input type="email" #blurBox matInput placeholder="" (blur)="getData(blurBox.value)">
+</mat-form-field>

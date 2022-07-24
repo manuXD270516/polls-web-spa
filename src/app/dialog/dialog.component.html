@@ -1,0 +1,139 @@
+<h1 mat-dialog-title>NUEVO ENCUESTADOR</h1>
+<div mat-dialog-content>
+  <form [formGroup]="pollsterForm">
+    <mat-form-field appearance="outline">
+      <mat-label>CI</mat-label>
+      <input
+        formControlName="CI"
+        matInput
+        placeholder="Ingrese carnet de identidad"
+      />
+    </mat-form-field>
+    <mat-error *ngIf="pollsterForm.get('CI')?.hasError('required')"
+      >CI is required</mat-error
+    >
+
+    <mat-form-field appearance="outline">
+      <mat-label>Nombres</mat-label>
+      <input formControlName="Names" matInput placeholder="Ingrese nombres" />
+    </mat-form-field>
+    <mat-error *ngIf="pollsterForm.get('Names')?.hasError('required')"
+      >Name is required</mat-error
+    >
+
+    <mat-form-field appearance="outline">
+      <mat-label>Apellidos</mat-label>
+      <input
+        formControlName="Lastnames"
+        matInput
+        placeholder="Ingrese apellidos"
+      />
+    </mat-form-field>
+    <mat-error *ngIf="pollsterForm.get('Lastnames')?.hasError('required')"
+      >Lastname is required</mat-error
+    >
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Correo electronico</mat-label>
+      <input
+        formControlName="Email"
+        matInput
+        class="form-input-field"
+        placeholder="Ingrese correo electronico"
+        pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
+      />
+      <mat-error *ngIf="pollsterForm.get('Email')?.hasError('required')"
+        >Email is required</mat-error
+      >
+      <mat-error *ngIf="pollsterForm.get('Email')?.hasError('email')"
+        >Please enter a valid email address
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <input
+        matInput
+        required
+        placeholder="Ingrese contraseña"
+        [type]="hide ? 'password' : 'text'"
+        formControlName="Password"
+      />
+      <mat-icon matSuffix (click)="hide = !hide">{{
+        hide ? "visibility_off" : "visibility"
+      }}</mat-icon>
+      <mat-hint *ngIf="!passwordInput?.value">Ingrese la contraseña</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Telefono</mat-label>
+      <input
+        type="tel"
+        formControlName="Phone"
+        matInput
+        placeholder="Ingrese Telefono"
+      />
+    </mat-form-field>
+    <mat-error *ngIf="pollsterForm.get('Phone')?.hasError('required')"
+      >Phone is required</mat-error
+    >
+
+    <!--  <mat-form-field appearance="outline">
+      <mat-label>Product Category</mat-label>
+      <mat-select placeholder="Category" formControlName="category">
+        <mat-option value="Fruits">Fruits</mat-option>
+        <mat-option value="Electronics">Electronics</mat-option>
+        <mat-option value="Vegitables">Vegitables</mat-option>
+      </mat-select>
+    </mat-form-field> -->
+
+    <!-- <mat-form-field appearance="outline">
+      <mat-label>Choose a date</mat-label>
+      <input matInput formControlName="date" [matDatepicker]="picker" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field> -->
+
+    <label for="">
+      <h1>Genero</h1>
+    </label>
+    <mat-radio-group formControlName="Gender" class="gender-radio-group">
+      <mat-radio-button
+        class="gender-radio-button"
+        *ngFor="let gender of genderOptions"
+        [value]="gender"
+      >
+        {{ gender }}
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Direccion</mat-label>
+      <textarea
+        formControlName="Address"
+        matInput
+        placeholder="Ingrese direccion"
+      ></textarea>
+    </mat-form-field>
+
+    <!--  <mat-form-field appearance="outline">
+      <mat-label>Price</mat-label>
+      <input matInput formControlName="price" type="number" placeholder="" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Comment</mat-label>
+      <textarea formControlName="comment" matInput></textarea>
+    </mat-form-field> -->
+  </form>
+</div>
+
+<div mat-dialog-action [align]="'end'">
+  <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+  <button
+    style="margin-left: 8px"
+    mat-raised-button
+    color="primary"
+    (click)="addPollster()"
+  >
+    {{ actionBtn }}
+  </button>
+</div>

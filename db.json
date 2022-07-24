@@ -1,0 +1,68 @@
+{
+  "productList": [
+    {
+      "productName": "Apples",
+      "category": "Fruits",
+      "freshness": "Brand New",
+      "price": 12,
+      "comment": "This is fresh apple",
+      "date": "2022-07-07T18:30:00.000Z",
+      "id": 1
+    },
+    {
+      "productName": "Iphone 12",
+      "category": "Electronics",
+      "freshness": "Refurbished",
+      "price": 799,
+      "comment": "Good Condition",
+      "date": "2022-07-14T18:30:00.000Z",
+      "id": 2
+    },
+    {
+      "productName": "Pinapple",
+      "category": "Fruits",
+      "freshness": "Brand New",
+      "price": 0.99,
+      "comment": "Fresh Pinapple",
+      "date": "2022-07-08T18:30:00.000Z",
+      "id": 3
+    },
+    {
+      "productName": "Potato",
+      "category": "Vegitables",
+      "freshness": "Brand New",
+      "price": 0.21,
+      "comment": "Fresh Potato",
+      "date": "2022-07-07T18:30:00.000Z",
+      "id": 4
+    },
+    {
+      "productName": "Potato",
+      "category": "Vegitables",
+      "freshness": "Second Hand",
+      "price": 0.21,
+      "comment": "Fresh Potato",
+      "date": "2022-07-07T18:30:00.000Z",
+      "id": 5
+    },
+    {
+      "productName": "dsa",
+      "category": "Electronics",
+      "freshness": "Brand New",
+      "price": 212,
+      "comment": "23113",
+      "date": "2022-07-06T04:00:00.000Z",
+      "id": 6
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
