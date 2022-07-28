@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  publicUrl: string = 'http://localhost:3005';
-  //publicUrl: string = 'http://54.232.23.102:3010';
+  //publicUrl: string = 'http://localhost:3005';
+  publicUrl: string = 'http://54.232.23.102:3010';
   apiUrl: string = `${this.publicUrl}/api`;
   apiPollsUrl: string = `${this.apiUrl}/poll`;
   apiPollsterUrl: string = `${this.apiUrl}/pollster`;
