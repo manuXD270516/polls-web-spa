@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { ApiService } from './services/api.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +13,12 @@ import { ApiService } from './services/api.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title: string = 'angular14crud';
-
+  title: string = 'App encuestas Monitoreo';
+  public isAuthenticated = false;
   constructor(
     private _dialog: MatDialog,
     private _apiService: ApiService,
+    public _authService: AuthService,
     public _router: Router,
     public _location: Location
   ) {}
@@ -41,5 +43,12 @@ export class AppComponent implements OnInit {
         if (val === 'save') {
         }
       });
+  }
+
+  logout(): void {
+    this._authService.logout();
+    this._router.navigate(['/auth/login'], {
+      queryParams: { loggedOut: 'success' },
+    });
   }
 }

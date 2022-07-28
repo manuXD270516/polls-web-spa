@@ -6,10 +6,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  apiUrl: string = 'http://localhost:3005/api';
+  publicUrl: string = 'http://localhost:3005';
+  //publicUrl: string = 'http://54.232.23.102:3010';
+  apiUrl: string = `${this.publicUrl}/api`;
   apiPollsUrl: string = `${this.apiUrl}/poll`;
   apiPollsterUrl: string = `${this.apiUrl}/pollster`;
-  apiAuthsUrl: string = `${this.apiUrl}/session/auth`;
+  apiAuthsUrl: string = `${this.apiUrl}/session/signin`;
 
   constructor(private _httpClient: HttpClient) {}
 
@@ -49,5 +51,9 @@ export class ApiService {
     };
     console.log(JSON.stringify(data));
     return this._httpClient.post(this.apiPollsterUrl, data);
+  }
+
+  auth(authData: any): Observable<any> {
+    return this._httpClient.post(`${this.apiAuthsUrl}/2`, authData);
   }
 }

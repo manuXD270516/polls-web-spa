@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -40,6 +40,16 @@ import { DialogPollsComponent } from './dialog-polls/dialog-polls.component';
 import { DialogMapComponent } from './dialog-map/dialog-map.component';
 
 import { GoogleMapsModule } from '@angular/google-maps';
+import { AuthComponent } from './auth/auth.component';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
+
+const routes: Routes = [
+  { path: '', component: CrudAppComponent, canActivate: [AuthGuard] },
+  { path: 'pollsters', component: CrudAppComponent, canActivate: [AuthGuard] },
+  { path: 'auth/login', component: AuthComponent },
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,10 +66,12 @@ import { GoogleMapsModule } from '@angular/google-maps';
     DialogDetailComponent,
     DialogPollsComponent,
     DialogMapComponent,
+    AuthComponent,
   ],
-  exports: [MatInputModule],
+  exports: [],
   imports: [
     MatDividerModule,
+    RouterModule.forRoot(routes),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -70,8 +82,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     MatButtonModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule,
     MatSelectModule,
+    MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatRadioModule,
@@ -81,7 +93,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     MatSortModule,
     GoogleMapsModule,
   ],
-  providers: [],
+  providers: [AuthGuard],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -23,8 +23,8 @@ export class DialogMapComponent implements OnInit {
     zoomControl: false,
     scrollwheel: false,
     disableDoubleClickZoom: true,
-    maxZoom: 15,
-    minZoom: 8,
+    maxZoom: 20,
+    minZoom: 4,
   };
 
   geolocation: any = {};
@@ -53,6 +53,7 @@ export class DialogMapComponent implements OnInit {
           Longitude,
           PollsterFullname: `${Names} ${Lastnames}`,
         };
+        this.refreshLocationMap();
         console.log(this.geolocation);
       },
       error: (err: any) => {
@@ -63,11 +64,9 @@ export class DialogMapComponent implements OnInit {
   ngOnInit(): void {
     this._webSocketService.listen('topicLocation').subscribe((data: any) => {
       console.log(data);
-      this.markers = [];
       this.geolocation.Latitude = data.newLatitude;
       this.geolocation.Longitude = data.newLongitude;
-
-      this.addMarker();
+      this.refreshLocationMap();
     });
     let { id = 0 } = this.params;
     this.initMaps();
@@ -97,7 +96,8 @@ export class DialogMapComponent implements OnInit {
     console.log(JSON.stringify(this.map?.getCenter()));
   }
 
-  addMarker() {
+  refreshLocationMap() {
+    this.markers = [];
     this.markers.push({
       position: {
         lat: this.geolocation.Latitude,

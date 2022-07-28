@@ -4,25 +4,45 @@ import { ApiService } from '../services/api.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-dialog-polls',
   templateUrl: './dialog-polls.component.html',
   styleUrls: ['./dialog-polls.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition(
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      ),
+    ]),
+  ],
 })
 export class DialogPollsComponent implements OnInit {
   pollsterFullName: String = '';
+  audio: HTMLAudioElement = new Audio();
   displayedColumns: string[] = [
     'ID',
     'NombreCompleto',
     'FechaNacimiento',
     'Direccion',
-    'Preg#01',
+    /*  'Preg#01',
     'Preg#02',
     'Preg#03',
-    'Preg#04',
-    'Accion',
+    'Preg#04', */
+    'Audio',
   ];
+  columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];
+  expandedElement: any | null;
   matTableDataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) matPaginator!: MatPaginator;
   @ViewChild(MatSort) matSort!: MatSort;
@@ -38,19 +58,34 @@ export class DialogPollsComponent implements OnInit {
     this.getPollsByPollsterId(id);
   }
 
+  isAudioPlayed() {
+    return this.audio.paused;
+  }
+  isQuestionField(item: { [key: string]: any }): boolean {
+    return `${item['key']}`.includes('Question');
+  }
+
+  getQuestion(questionAnswerValue: string | any): string {
+    return `${questionAnswerValue}`.split('|')[0];
+  }
+
+  getAnswer(questionAnswerValue: string | any): string {
+    return `${questionAnswerValue}`.split('|')[1];
+  }
   mapData(Polls: any[]): any[] {
     let pollsTransform: any = [];
     Polls.forEach((poll: any) => {
       let { Questions } = poll;
+      delete poll.Questions;
       let questionTransform: any = {};
       Questions.forEach((question: any, i: number) => {
         let { QuestionName, Answer } = question;
         questionTransform[`Question${i}`] = `${QuestionName} | ${Answer}`;
         //questionTransform[`Question${i}`] = Answer;
       });
+
       pollsTransform.push({ ...poll, ...questionTransform });
     });
-    console.log(pollsTransform);
     return pollsTransform;
   }
   getPollsByPollsterId(id: number) {
@@ -70,7 +105,18 @@ export class DialogPollsComponent implements OnInit {
   }
 
   playAudio(audioEncode: String) {
-    console.log(audioEncode);
+    if (this.audio.paused) {
+      this.audio.src = `${this._apiService.publicUrl}${audioEncode}`;
+      this.audio.load();
+      this.audio.play();
+      console.log(this.audio.paused);
+    } else {
+      this.audio.pause();
+    }
+
+    /* setTimeout(() => {
+      console.log(audio);
+    }, 5000); */
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

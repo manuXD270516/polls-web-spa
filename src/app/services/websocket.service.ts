@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class WebsocketService {
   socket: any;
-  readonly urlSocket: string = 'http://localhost:3005';
+  //readonly urlSocket: string = 'http://localhost:3005';
+  readonly urlSocket: string = 'http://54.232.23.102:3006';
   constructor() {
     this.socket = io(this.urlSocket, {
       transports: ['websocket', 'polling', 'flashsocket'],

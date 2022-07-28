@@ -14,6 +14,7 @@
     >Tuts</a
   > -->
   <a
+    *ngIf="_authService.isAuthenticated()"
     mat-flat-button
     routerLink="/pollsters"
     style="margin-right: 10px"
@@ -22,9 +23,34 @@
     <mat-icon>list</mat-icon>
     Encuestadores</a
   >
-  <button mat-raised-button color="warn" (click)="openDialog()">
+  <button
+    style="margin-right: 40px"
+    *ngIf="_authService.isAuthenticated()"
+    mat-raised-button
+    color="warn"
+    (click)="openDialog()"
+  >
     <mat-icon>add_box</mat-icon>
     Nuevo encuestador
   </button>
+
+  <li
+    style="margin-right: 10px"
+    *ngIf="_authService.isAuthenticated()"
+    class="nav-item"
+  >
+    <a class="nav-link">
+      {{ _authService.getUsername() }}
+    </a>
+  </li>
+  <button
+    *ngIf="_authService.isAuthenticated()"
+    mat-menu-item
+    (click)="logout()"
+  >
+    <mat-icon>exit_to_app</mat-icon>
+    Logout
+  </button>
 </mat-toolbar>
+
 <router-outlet></router-outlet>
