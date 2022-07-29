@@ -40,6 +40,7 @@ export class DialogPollsComponent implements OnInit {
     'Preg#03',
     'Preg#04', */
     'Audio',
+    'Maps',
   ];
   columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];
   expandedElement: any | null;
@@ -56,6 +57,11 @@ export class DialogPollsComponent implements OnInit {
   ngOnInit(): void {
     let { id } = this.params;
     this.getPollsByPollsterId(id);
+  }
+
+  goMaps(latitude: string, longitude: string): void {
+    const url: string = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+    window.open(url, '_blank');
   }
 
   isAudioPlayed() {
